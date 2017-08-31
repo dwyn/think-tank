@@ -1,0 +1,8 @@
+<p>  You've been thinking, <%= @user.username %></p>
+  <p>Here's your current ideas</p>
+
+<% @user.thoughts.each do |thought| %>
+  <div>
+    <%= thought.content %>
+  </div>
+<% end %>
