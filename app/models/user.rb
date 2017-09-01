@@ -1,16 +1,11 @@
 class User <ActiveRecord::Base
   has_many :projects
-  has_many :sections, through :projects
+  has_many :sections, through: :projects
 
-  def slug
-    self.username.gsub(" ", "-")
-  end
+  validates_presence_of :username
+  validates_presence_of :email
+  validates_presence_of :password
 
-  def self.find_by_slug(slug)
-    User.all.each do |user|
-      if user.slug == slug
-        return user
-      end
-    end
-  end
+  extend Slugifiable::ClassMethods
+  include Slugifiable::InstanceMethods
 end
