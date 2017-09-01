@@ -1,27 +1,31 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Think Tank</title>
-  </head>
-  <body>
-    <nav>
-      <% if logged_in? %>
-      <a href="/thoughts/new"> Create Thought </a>
-      <a href="/logout"> Log Out </a>
-      <p>Welcome, <%=current_user.username %></p>
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
-    <% else %>
-      <a href="/signup">Sign Up</a>
-      <a href="/login"> Sign In </a>
-    <%end %>
+  <title>Est</title>
 
-      <%end %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    </nav>
+  <link rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+<body>
+  <div class="wrapper">
 
       <%= yield %>
 
+    <footer class="branding">
+      <small>&copy; 2017 <strong>Est</strong></small>
+    </footer>
+  </div>
 
-    </div>
-  </body>
-</html>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <!--[if lt IE 7]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+    <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+  <![endif]-->
+</body>
