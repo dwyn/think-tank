@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'/user/create_user'
     else
-      redirect to '/projects'
+      redirect to '/project/index'
     end
   end
 
@@ -20,8 +20,6 @@ class UsersController < ApplicationController
       redirect to "/projects"
     end
   end
-
-
 
   post '/login' do
     user = User.find_by(:username => params[:username])
@@ -41,5 +39,12 @@ class UsersController < ApplicationController
       redirect to '/'
     end
   end
+
+  get '/projects' do
+    "Hello World"
+
+    erb :'/project/index'
+  end
+
 
 end

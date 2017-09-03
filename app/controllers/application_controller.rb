@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     @random_app_idea = Project.all.sample
-
+    # binding.pry
     erb :welcome
   end
 
