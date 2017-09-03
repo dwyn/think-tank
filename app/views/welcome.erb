@@ -1,0 +1,17 @@
+<h1>Welcome To Think Tank!</h1>
+<h2>Shared thoughts for app ideas!</h2>
+
+<nav>
+  <% if logged_in? %>
+    <a href="/projects/new">Create New Project</a>
+    <a href="/logout">Log Out</a>
+      <p>Welcome, #current_user</p>
+  <% else %>
+    <a href="/signup">Sign Up</a>
+    <a href="/login"> Sign In </a>
+  <%end %>
+</nav>
+
+<div class="content">
+  <p> <%= @random_app_idea.project_name %> </p>
+</div>

@@ -1,8 +1,8 @@
 <p>  You've been thinking, <%= @user.username %></p>
-  <p>Here's your current ideas</p>
+  <p>Here are your current ideas</p>
 
-<% @user.thoughts.each do |thought| %>
+<% @user.projects.each do |thought| %>
   <div>
-    <%= thought.content %>
+    <%= projects.content %>
   </div>
 <% end %>

@@ -1,18 +1,29 @@
 require './config/environment'
+require 'sinatra/base'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
 
+  # use Rack::Flash
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    use Rack::Flash
   end
 
   get "/" do
-    @random_app_idea = []
-    @random_app_idea = Project.all
-    # binding.pry
+    @random_app_idea = Project.all.sample
+
     erb :welcome
   end
 
+  helpers do
+     def logged_in?
+       !!session[:user_id]
+     end
+
+     def current_user
+       User.find(session[:user_id])
+     end
+
+   end
 end
