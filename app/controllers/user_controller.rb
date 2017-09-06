@@ -2,6 +2,11 @@ require 'sinatra/base'
 require 'rack-flash'
 
 class UsersController < ApplicationController
+
+  # get '/users/home' do
+  #   @user = current_user
+  #   erb :'/users/user_home'
+  # end
 #RENDER COMING FROM THE WELCOME PAGE
   get '/signup' do
     if !logged_in?
@@ -17,18 +22,7 @@ class UsersController < ApplicationController
     else
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
       session[:id] = @user.id
-      redirect to "/users/home"
-    end
-  end
-
-#USERS HOME PAGE REDIRECTED FROM SIGNUP PAGE
-  get '/users/home' do
-    puts "Hello world"
-    if logged_in?
-      @user = current_user unless current_user == nil
-      erb :'users/home'
-    else
-      redirect "/login"
+      redirect to "/users/user_home"
     end
   end
 
@@ -36,10 +30,17 @@ class UsersController < ApplicationController
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/users/home"
+      redirect "/users/user_home"
     else
       redirect to '/signup'
     end
+  end
+
+#USE SLUG TO MAKE ROUTE RESTFUL
+  get '/list_your_projects' do
+    @user = current_user
+    @user_projects = current_user.projects.all
+    erb :"/projects/user_projects"
   end
 
   get '/logout' do

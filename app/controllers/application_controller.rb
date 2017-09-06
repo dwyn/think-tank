@@ -13,9 +13,13 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    @random_app_idea = Project.all.sample
-    # binding.pry
-    erb :welcome
+    if !logged_in?
+      @random_app_idea = Project.all.sample
+      erb :welcome
+    else
+      @user = current_user
+      erb :"users/user_home"
+    end
   end
 
   helpers do
