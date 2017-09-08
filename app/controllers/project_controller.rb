@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
 
   get '/projects/new' do
     if logged_in?
+      @sections = Section.all
       erb :'/projects/create_project'
     else
       redirect '/login'
@@ -18,9 +19,11 @@ class ProjectsController < ApplicationController
   end
 
   post '/projects/new' do
+    binding.pry
     if params[:description] != ""
       @project = Project.create(:content =>params[:description])
       @project.user = current_user
+      @project.section_id = params[:section_id]
       @project.save
       redirect "/projects/#{@project.id}"
     end

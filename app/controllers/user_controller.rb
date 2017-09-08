@@ -3,9 +3,9 @@ require 'rack-flash'
 
 class UsersController < ApplicationController
 
-  # get '/users/home' do
+  # get '/home' do
   #   @user = current_user
-  #   erb :'/users/user_home'
+  #   # erb :'/users/user_home'
   # end
 #RENDER COMING FROM THE WELCOME PAGE
   get '/signup' do
@@ -37,8 +37,9 @@ class UsersController < ApplicationController
   end
 
 #USE SLUG TO MAKE ROUTE RESTFUL
-  get '/list_your_projects' do
+  get '/:name/projects' do
     @user = current_user
+    params[:name] = @user.username
     @user_projects = current_user.projects.all
     erb :"/projects/user_projects"
   end

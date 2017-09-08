@@ -1,7 +1,9 @@
-<p>These are all of your projects, <%= @user.username.capitalize %>!</p>
+<h2>These are all of your projects, <%= @user.username.capitalize %>!</h2>
 
 <% @user_projects.each do |project| %>
   <p>Project Name: <%= project.project_name %> </p>
   <p>Project Description: <%= project.description %> </p>
   <p>Project Link: <%= project.link %> </p><br>
 <% end %>
+<br>
+<a href="/">Return home</a>

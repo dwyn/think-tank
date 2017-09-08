@@ -2,8 +2,11 @@
 
 <form class="" action="/projects/new" method="post">
   <h2><label>New Project</label></h2>
-  <p>Project Name: <input type="text" name="project_name" value=""></p>
-  <p>Project Section: <input type="text" name="section" value=""></p>
-  <p>Project Description: <input type="text" name="description" value=""></p>
+  <p>Project Name: <input type="text" name="project_name"></p>
+  <p>Project Description: <input type="text" name="description"></p>
+    <% @sections.each do |section| %>
+    <label> <%= section.name %></label>
+      <input type="checkbox" name="project[section_id][]" value="<%=section.id%>">
+    <%end%>
   <input type="submit" name="" value="submit">
 </form>
