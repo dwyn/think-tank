@@ -19,8 +19,10 @@ class ApplicationController < Sinatra::Base
     else
       @user = current_user
       # binding.pry
-      @user_name = @user.username
-      params[:name] = @user_name
+      @user_name = User.find_by_slug(params[:slug])
+      # @user_name = @user.username
+      binding.pry
+      # params[:name] = @user_name
       erb :"/users/home"
     end
   end
