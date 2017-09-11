@@ -1,7 +1,7 @@
 require 'rack-flash'
 
 class ProjectsController < ApplicationController
-  use Rack::Flash
+  use Rack::Flash, :sweep => true
 
   get '/projects' do
     @projects = Project.all
@@ -19,12 +19,13 @@ class ProjectsController < ApplicationController
   end
 
   post '/projects/new' do
-    binding.pry
     if params[:description] != ""
-      @project = Project.create(:content =>params[:description])
+      @project = Project.create(:description =>params[:description])
       @project.user = current_user
       @project.section_id = params[:section_id]
       @project.save
+
+      flash[:message] = "Thanks for your app idea, #{current_user.name.capitalize}!"
       redirect "/projects/#{@project.id}"
     end
   end
@@ -47,11 +48,15 @@ class ProjectsController < ApplicationController
     end
   end
 
-  post '/projectss/:id/edit' do
+  post '/projects/:id/edit' do
+    # binding.pry
     @project = Project.find_by_id(params[:id])
     if @project.user == current_user && params[:content] != ""
-      @project.content = params[:content]
+      @project.project_name = params[:project_name]
+      @project.description = params[:description]
+      @project.link = params[:link]
       @project.save
+      flash[:message] = "Project successfully updated!"
       redirect "/projects/#{@project.id}"
     else
       redirect "/projects/#{@project.id}/edit"
@@ -62,6 +67,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     if @project.user == current_user
       @project.destroy
+      flash[:message] = "Project successfully obliterated." #{<a href="/projects/new"> Would you like to reate another?</a>?}" can I add a hyperlink to my project?
       redirect "/"
     else
       redirect "/projects/#{@project.id}"

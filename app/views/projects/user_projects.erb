@@ -3,7 +3,12 @@
 <% @user_projects.each do |project| %>
   <p>Project Name: <%= project.project_name %> </p>
   <p>Project Description: <%= project.description %> </p>
-  <p>Project Link: <%= project.link %> </p><br>
+  <p>Project Link: <%= project.link %> </p>
+  <a href="/projects/<%=project.id%>/edit">Edit me!</a>
+  <a href="/projects/<%=project.id%>/delete">Delete me =(</a>
+  <br>
+  <br><br>
+
 <% end %>
 <br>
 <a href="/">Return home</a>

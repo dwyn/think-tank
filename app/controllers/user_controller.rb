@@ -39,6 +39,7 @@ class UsersController < ApplicationController
 #USE SLUG TO MAKE ROUTE RESTFUL
   get '/:name/projects' do
     @user = current_user
+    # binding.pry
     params[:name] = @user.username
     @user_projects = current_user.projects.all
     erb :"/projects/user_projects"

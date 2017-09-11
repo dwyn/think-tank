@@ -9,6 +9,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
+    use Rack::Flash, :sweep => true
     set :session_secret, "secret"
   end
 
@@ -19,10 +20,9 @@ class ApplicationController < Sinatra::Base
     else
       @user = current_user
       # binding.pry
-      @user_name = User.find_by_slug(params[:slug])
-      # @user_name = @user.username
-      binding.pry
-      # params[:name] = @user_name
+      # @user_name = @user.username.find_by_slug(params[:slug])
+      @user_name = @user.username
+      params[:name] = @user_name
       erb :"/users/home"
     end
   end
