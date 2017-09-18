@@ -5,7 +5,10 @@
   <p>Project Description: <%= project.description %> </p>
   <p>Project Link: <%= project.link %> </p>
   <a href="/projects/<%=project.id%>/edit">Edit me!</a>
-  <a href="/projects/<%=project.id%>/delete">Delete me =(</a>
+  <form class="" action="/projects/<%= project.id %>/delete" method="post">
+    <input id = "hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" name="" value="Delete Project">
+  </form>
   <br>
   <br><br>
 

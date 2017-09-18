@@ -3,10 +3,10 @@ require 'rack-flash'
 
 class UsersController < ApplicationController
 
-  # get '/home' do
-  #   @user = current_user
-  #   # erb :'/users/user_home'
-  # end
+  get '/home' do
+    @user = current_user
+    erb :'/users/home'
+  end
 #RENDER COMING FROM THE WELCOME PAGE
   get '/signup' do
     if !logged_in?
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     else
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
       session[:id] = @user.id
-      redirect to "/users/user_home"
+      redirect to "/home"
     end
   end
 
@@ -30,17 +30,16 @@ class UsersController < ApplicationController
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/users/user_home"
+      redirect "/home"
     else
       redirect to '/signup'
     end
   end
 
 #USE SLUG TO MAKE ROUTE RESTFUL
-  get '/:name/projects' do
+  get '/users/:slug' do
     @user = current_user
     # binding.pry
-    params[:name] = @user.username
     @user_projects = current_user.projects.all
     erb :"/projects/user_projects"
   end

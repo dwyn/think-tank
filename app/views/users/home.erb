@@ -1,6 +1,8 @@
+<% #flash a message here if flash message... %>
+
 <h1>Hi, <%= @user.username.capitalize %>!</h1>
 
-<a href="/<%=@user.username%>/projects">List Projects</a><br>
+<a href="/users/<%= current_user.username %>">List Projects</a><br>
 <a href="/projects/new">Create a new project</a><br>
 <br>
 <br>

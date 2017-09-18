@@ -20,12 +20,12 @@ class ProjectsController < ApplicationController
 
   post '/projects/new' do
     if params[:description] != ""
-      @project = Project.create(:description =>params[:description])
+      @project = Project.create(:description =>params[:description], :project_name => params[:project_name], :link => params[:link])
       @project.user = current_user
       @project.section_id = params[:section_id]
       @project.save
 
-      flash[:message] = "Thanks for your app idea, #{current_user.name.capitalize}!"
+      flash[:message] = "Thanks for your app idea, #{current_user.username.capitalize}!"
       redirect "/projects/#{@project.id}"
     end
   end

@@ -3,6 +3,7 @@
 <form class="" action="/projects/new" method="post">
   <h2><label>New Project</label></h2>
   <p>Project Name: <input type="text" name="project_name"></p>
+  <p>Project Link: <input type="text" name="link"></p>
   <p>Project Description: <input type="text" name="description"></p>
     <% @sections.each do |section| %>
     <label> <%= section.name %></label>
