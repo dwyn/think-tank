@@ -1,7 +1,11 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %><br>
+
 <h1>Edit Your Project</h1>
 <form class="" action="/projects/<%= @project.id %>/edit" method="post">
-  <p><input type="text" name="project_name" value="<%= @project.project_name %>"></p>
-  <p><input type="text" name="description" value="<%= @project.description %>"></p>
-  <p><input type="text" name="link" value="<%= @project.link %>"></p>
+  <p>Edit Name:  <input type="text" name="project_name" value="<%= @project.project_name %>"></p>
+  <p>Edit Desc.:  <input type="text" name="description" value="<%= @project.description %>"></p>
+  <p>Edit Links:  <input type="text" name="link" value="<%= @project.link %>"></p>
   <input type="submit" name="" value="submit">
 </form>

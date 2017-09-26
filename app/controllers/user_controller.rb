@@ -21,6 +21,7 @@ class UsersController < ApplicationController
       redirect to '/signup'
     else
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+
       session[:id] = @user.id
       redirect to "/home"
     end

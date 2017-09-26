@@ -8,5 +8,7 @@
 <br>
 <div class="content">
   <a href="/projects"> View All Projects! </a>
+  <% if @random_app_idea %>
   <p> <%= @random_app_idea.project_name %> </p>
+  <% end %>
 </div>

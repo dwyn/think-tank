@@ -19,8 +19,6 @@ class ApplicationController < Sinatra::Base
       erb :welcome
     else
       @user = current_user
-      # binding.pry
-      # @user_name = @user.username.find_by_slug(params[:slug])
       @user_name = @user.username
       params[:name] = @user_name
       erb :"/users/home"
@@ -29,12 +27,11 @@ class ApplicationController < Sinatra::Base
 
   helpers do
      def logged_in?
-       !!session[:user_id]
+       !!session[:id]
      end
 
      def current_user
-       User.find(session[:user_id])
+       User.find(session[:id])
      end
-
    end
 end

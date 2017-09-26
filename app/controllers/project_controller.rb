@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
   end
 
   get '/projects/:id' do
-    if logged_in?
+    if logged_in? && current_user == @project.user_id
       @project = Project.find_by_id(params[:id])
       erb :'/projects/show_projects'
     else
@@ -51,7 +51,9 @@ class ProjectsController < ApplicationController
   post '/projects/:id/edit' do
     # binding.pry
     @project = Project.find_by_id(params[:id])
-    if @project.user == current_user && params[:content] != ""
+    # binding.pry
+    if @project.user_id == current_user && params[:content] != ""
+      binding.pry
       @project.project_name = params[:project_name]
       @project.description = params[:description]
       @project.link = params[:link]
@@ -59,6 +61,7 @@ class ProjectsController < ApplicationController
       flash[:message] = "Project successfully updated!"
       redirect "/projects/#{@project.id}"
     else
+      flash[:message] = "You didnt change anything. Try again."
       redirect "/projects/#{@project.id}/edit"
     end
   end
