@@ -1,10 +1,9 @@
-<h2>These are all of your projects, <%= @user.username.capitalize %>!</h2>
+<h2>These are all of your projects, <%= @user.name.capitalize %>!</h2>
 
 <% @user_projects.each do |project| %>
-  <p>Project Name: <%= project.project_name %> </p>
-  <p>Project Description: <%= project.description %> </p>
-  <p>Project Link: <%= project.link %> </p>
-  <a href="/projects/<%=project.id%>/edit">Edit me!</a>
+  <p>Project Name: <%= project.name %> </p>
+  <p>Project Description: <%= project.description %> </p><br>
+  <a href="/projects/<%=project.id%>/edit">Edit <%="#{project.name}"%>!</a>
   <form class="" action="/projects/<%= project.id %>/delete" method="post">
     <input id = "hidden" type="hidden" name="_method" value="delete">
     <input type="submit" name="" value="Delete Project">

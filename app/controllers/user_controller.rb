@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = current_user
     erb :'/users/home'
   end
-#RENDER COMING FROM THE WELCOME PAGE
+#RENDER FROM THE WELCOME PAGE
   get '/signup' do
     if !logged_in?
       erb :'/users/create_user'
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to '/signup'
     else
-      @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user = User.create(:name => params[:username], :email => params[:email], :password => params[:password])
 
       session[:id] = @user.id
       redirect to "/home"
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
+    user = User.find_by(:name => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect "/home"
@@ -40,7 +40,6 @@ class UsersController < ApplicationController
 #USE SLUG TO MAKE ROUTE RESTFUL
   get '/users/:slug' do
     @user = current_user
-    # binding.pry
     @user_projects = current_user.projects.all
     erb :"/projects/user_projects"
   end

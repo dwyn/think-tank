@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
       erb :welcome
     else
       @user = current_user
-      @user_name = @user.username
+      @user_name = @user.name
       params[:name] = @user_name
       erb :"/users/home"
     end

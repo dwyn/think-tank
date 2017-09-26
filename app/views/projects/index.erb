@@ -1,6 +1,10 @@
+<h1>Projects Index</h1><br><br>
+
 <% @projects.each do |project| %>
-<p>#Projects user</p>
-<p> <%= project.project_name %> </p><br>
-<p> <%= project.description %> </p><br>
-<p> <%= project.link %> </p><br>
+<p>Project Name: <%= project.name %> </p>
+<p>By: <%= @users.find_by("#{project.user_id}").name%></p>
+<p>Description: <%= project.description %> </p>
+<p>Section: <%= @sections.find_by("#{project.section_id}").name%> </p><br>
+
 <% end %>
+<br>
